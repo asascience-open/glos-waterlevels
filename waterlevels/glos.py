@@ -21,7 +21,7 @@ import os
 import pandas
 import netCDF4
 
-from waterlevels.config import GLWL_URL, CACHE_DIR
+from waterlevels.config import GLWL_URL, CACHE_DIR, DATA_DIR
 
 def data_download ():
     filename = download_file(GLWL_URL, CACHE_DIR)
@@ -167,6 +167,7 @@ def pageParse(pageno, report_path):
         read_data = f.readlines()
 
 
+
     title_index = [i for i, s in enumerate(read_data) if re.search('Water Levels$',s)]
     title = ''.join(read_data[title_index[0]].strip())
     title = title.replace(' ', '')
@@ -241,11 +242,15 @@ def ncCreate(pageno, report_path):
 
     time_list, time_list_start = getTime(page)
     month = time_list_start[0][3:]
+    date_time_list = [datetime.fromtimestamp(i) for i in time_list]
+    dtg = date_time_list[0].strftime('%Y-%m')
     #Define the location and name for saving the file
 
     output_directory = os.path.join(DATA_DIR, title)
-    output_filename = "GreatLakesWaterLevels_%s_%s.nc" % (title,month)
-    filepath = output_directory+output_filename
+    if not os.path.exists(output_directory):
+        os.makedirs(output_directory)
+    output_filename = "GreatLakesWaterLevels_%s_%s.nc" % (title,dtg)
+    filepath = os.path.join(output_directory, output_filename)
     print filepath
     lat_list,lon_list = getLatLon(station_list)
     if len(lat_list) != len(station_list):
@@ -325,7 +330,9 @@ def ncCreate(pageno, report_path):
     #Set data
     #rebuilt = np.reshape(data,[len(data[0]),len(data)])
     #rebuilt = np.rot90(data.copy(),-1)
-    var[:] = data
+    npdata = np.array(data, dtype=np.float32)
+
+    var[:] = npdata.T
 
     nc.sync()
 
