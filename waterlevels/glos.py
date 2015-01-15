@@ -321,7 +321,7 @@ def ncCreate(pageno, report_path):
 
     coordinates = ["time", "lat", "lon"]
     nc.setncattr("featureType", "timeseries")
-    var = nc.createVariable('water_level',    "f4", ("station", "time"), fill_value=fillvalue)
+    var = nc.createVariable('water_level',    "f4", ("time", "station"), fill_value=fillvalue)
     #Set 'coordinates' attribute
     setattr(var, "coordinates", " ".join(coordinates))
     setattr(var, "standard_name", "water_surface_height_above_reference_datum")
