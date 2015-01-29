@@ -146,7 +146,7 @@ def getTime(page):
     time_list_start = page['Date'].values
     time_list = []
     for each in time_list_start:
-        time_list.append(int(clock.mktime(clock.strptime(each,'%d-%b-%Y'))))
+        time_list.append(int(clock.mktime(clock.strptime(each,'%d-%b-%Y')))-int(3600*5))
 
     return time_list, time_list_start
 #--------------------------------------------------------------------------------
