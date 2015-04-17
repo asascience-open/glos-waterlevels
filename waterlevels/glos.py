@@ -293,6 +293,12 @@ def ncCreate(pageno, report_path):
     nc.setncattr("time_coverage_start",    (time_list[0]))
     nc.setncattr("time_coverage_end",     (time_list[-1]))
     #nc.setncattr("time_coverage_duration", time_list[0]-time_list[-1])
+    nc.setncattr("creator_email", "hhpm@usace.army.mil")
+    nc.setncattr("creator_url", "http://www.lre.usace.army.mil/Missions/GreatLakesInformation/GreatLakesWaterLevels.aspx")
+    nc.setncattr("acknowledgement", 'Daily mean Great Lakes water levels are harvested from the Great Lakes Water Level reports (link) on the Great Lakes Information pages (link) maintained by the Detroit District of the US Army Corps of Engineers (link). The mean water levels for each of the Great Lakes is calculated from individual water level sensors according to guidance provided by the Coordinating Committee on Great Lakes Basic Hydraulic and Hydrologic Data.')
+    nc.setncattr('institution', 'US Army Corps of Engineers')
+    nc.setncattr('comment', 'These data are harvested with permission from the U.S. Army Corps of Engineers\' Great Lakes Water Levels Reports. (link to http://www.lre.usace.army.mil/Missions/GreatLakesInformation/GreatLakesWaterLevels/CurrentConditions.aspx)')
+
     nc.setncattr("time_coverage_resolution", "0")
     nc.setncattr("Conventions", "CF-1.6")
     #nc.setncattr("date_created", datetime.utcnow().strftime("%Y-%m-%dT%H:%M:00Z"))
