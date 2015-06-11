@@ -21,7 +21,7 @@ import os
 import pandas
 import netCDF4
 
-from waterlevels.config import GLWL_URL, CACHE_DIR, DATA_DIR
+from waterlevels.config import GLWL_URL, CACHE_DIR, DATA_DIR, WATER_LEVEL_UNITS
 
 def data_download ():
     filename = download_file(GLWL_URL, CACHE_DIR)
@@ -323,7 +323,7 @@ def ncCreate(pageno, report_path):
     nc.publisher_phone = '(401) 789-6224'
     nc.publisher_email = 'devops@asascience.com'
     nc.publisher_url = 'http://www.asascience.com/'
-    units = 'meters'
+    units = WATER_LEVEL_UNITS
 
     coordinates = ["time", "lat", "lon"]
     nc.setncattr("featureType", "timeseries")

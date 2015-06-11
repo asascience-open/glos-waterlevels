@@ -1,3 +1,4 @@
 GLWL_URL: http://w3.lre.usace.army.mil/hh/GreatLakesWaterLevels/GLWL-CurrentMonth-Meters.pdf
 CACHE_DIR: /tmp
 DATA_DIR: /data/water_levels/
+WATER_LEVEL_UNITS: meters
